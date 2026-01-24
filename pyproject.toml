@@ -1,0 +1,53 @@
+[project]
+description = "In this project, we implement a recognized transformer model for object detection tasks."
+name = "recognized-transformer"
+readme = "README.md"
+requires-python = ">=3.12"
+version = "0.1.0"
+
+dependencies = [
+  "ultralytics",
+  "roboflow",
+  "supervision",
+  "opencv-python",
+]
+
+[project.optional-dependencies]
+cpu = [
+  "torch",
+  "torchvision",
+]
+
+gpu = [
+  "torch",
+  "torchvision",
+]
+
+[tool.uv]
+environments = ["sys_platform == 'linux'", "sys_platform == 'windows'"]
+conflicts = [
+  [
+    {extra = "cpu"},
+    {extra = "gpu"},
+  ],
+]
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu126", extra = "gpu" },
+]
+torchvision = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu126", extra = "gpu" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
