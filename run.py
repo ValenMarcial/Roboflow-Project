@@ -3,7 +3,7 @@ import supervision as sv
 from ultralytics import RTDETR
 
 # --- CONFIGURACIÓN ---
-WEIGHTS_PATH = "runs/detect/train/weights/best.pt" 
+WEIGHTS_PATH = "runs/detect/runs/detect/mi_entrenamiento_rtdetr/weights/best.pt" 
 IMAGE_PATH = "imagen_prueba.jpg"  # Pon aquí la foto que quieras probar
 CONFIDENCE = 0.5                  # Umbral de confianza (50%)
 

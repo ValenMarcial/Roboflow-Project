@@ -1,1 +1,33 @@
-.venv
+# --- Entornos Virtuales y Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# --- SEGURIDAD (CRÍTICO) ---
+# Nunca subir las claves de API
+.env
+
+# --- Datasets ---
+# Ignorar la carpeta que descargaste de Roboflow
+Fire-Smoke-Detection-*/
+datasets/
+
+# --- Modelos y Pesos ---
+# Los archivos .pt son pesados y se descargan por código
+*.pt
+*.onnx
+
+# --- Resultados de Entrenamiento ---
+# Acá se guardan gigas de logs y pruebas
+runs/
+
+# --- Archivos de Salida y Pruebas Locales ---
+# Imágenes de resultado generadas
+resultado_*.jpg
+
+
+# --- Configuración de IDE y Sistema ---
+.vscode/
+.idea/
+.DS_Store
