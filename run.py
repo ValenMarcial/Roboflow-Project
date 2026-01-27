@@ -4,7 +4,7 @@ from ultralytics import RTDETR
 
 # --- CONFIGURACIÓN ---
 WEIGHTS_PATH = "runs/detect/runs/detect/mi_entrenamiento_rtdetr/weights/best.pt" 
-IMAGE_PATH = "imagen_prueba.jpg"  # Pon aquí la foto que quieras probar
+IMAGE_PATH = "incendio.jpg"  # Pon aquí la foto que quieras probar
 CONFIDENCE = 0.5                  # Umbral de confianza (50%)
 
 def run_inference():
@@ -32,14 +32,16 @@ def run_inference():
 
     # 5. Configurar anotadores (Cajas y Etiquetas)
     box_annotator = sv.BoxAnnotator(thickness=2)
-    label_annotator = sv.LabelAnnotator(text_scale=0.5, text_thickness=1)
+    label_annotator = sv.LabelAnnotator(text_scale=0.5, text_thickness=1, text_position=sv.Position.BOTTOM_CENTER)
 
     # Crear etiquetas con Nombre de clase + Confianza
     labels = [
-        f"{class_name} {confidence:.2f}"
-        for class_name, confidence
-        in zip(detections.data['class_name'], detections.confidence)
+        f"{model.names[class_id]} {confidence:.2f}"
+        for class_id, confidence
+        in zip(detections.class_id, detections.confidence)
     ]
+
+    print("Etiquetas generadas:", labels)
 
     # 6. Dibujar sobre la imagen
     annotated_image = box_annotator.annotate(scene=image.copy(), detections=detections)
