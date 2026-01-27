@@ -16,7 +16,7 @@ def train_model():
     project = rf.workspace(WORKSPACE).project(PROJECT)
     
     # IMPORTANTE: RF-DETR prefiere el formato COCO
-    dataset = project.version(VERSION).download("yolov8")
+    dataset = project.version(VERSION).download("yolov12")
 
     print("Cargando arquitectura RF-DETR...")
     # Puedes usar 'rf-detr-small' para velocidad o 'rf-detr-large' para precisión
@@ -25,13 +25,16 @@ def train_model():
     print("🔥 Iniciando entrenamiento en GPU...")
     model.train(
         data=f"{dataset.location}/data.yaml",
-        epochs=6,
-        imgsz=512,      # BAJAR de 640 a 512 (Ahorra mucha VRAM)
-        batch=2,        # BAJAR de 4 a 2 (Fundamental para la 1650)
+        epochs=100,
+        imgsz=640,      # BAJAR de 640 a 512 (Ahorra mucha VRAM)
+        batch=4,        # BAJAR de 4 a 2 (Fundamental para la 1650)
         device=0,
-        workers=2,      # Bajalo a 2 para no saturar el CPU
+        half=True,
+        workers=8,      # Bajalo a 2 para no saturar el CPU
         project="runs/detect",
-        name="mi_entrenamiento_rtdetr"
+        name="mi_entrenamiento_rtdetr",
+        exist_ok=True,
+        save_dir="/home/valentin/Escritorio/Uni/Roboflow-Project/runs/detect/runs/detect/mi_entrenamiento_rtdetr",
     )
     
     print("\n✅ Entrenamiento finalizado.")
