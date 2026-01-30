@@ -6,10 +6,11 @@ load_dotenv()
 
 # --- CONFIGURACIÓN ---
 API_KEY = os.getenv("ROBOFLOW_API_KEY")
-WORKSPACE = "vishal-sharma-hfh1k"
-PROJECT = "fire-smoke-detection-1oemc"
-VERSION = 3
-                                     
+WORKSPACE = "valentin-kguz0"
+PROJECT = "deteccion-incendio-forestal"
+VERSION = 1
+
+
 def train_model():
     print("Descargando dataset...")
     rf = Roboflow(api_key=API_KEY)
@@ -25,16 +26,11 @@ def train_model():
     print("🔥 Iniciando entrenamiento en GPU...")
     model.train(
         data=f"{dataset.location}/data.yaml",
-        epochs=100,
-        imgsz=640,      # BAJAR de 640 a 512 (Ahorra mucha VRAM)
-        batch=4,        # BAJAR de 4 a 2 (Fundamental para la 1650)
+        epochs=1,           # Solo 1 época para testear errores
+        imgsz=640,
+        batch=2,            # Batch bajo para que no falle por memoria
         device=0,
-        half=True,
-        workers=8,      # Bajalo a 2 para no saturar el CPU
-        project="runs/detect",
-        name="mi_entrenamiento_rtdetr",
-        exist_ok=True,
-        save_dir="/home/valentin/Escritorio/Uni/Roboflow-Project/runs/detect/runs/detect/mi_entrenamiento_rtdetr",
+        name="test_merge"
     )
     
     print("\n✅ Entrenamiento finalizado.")

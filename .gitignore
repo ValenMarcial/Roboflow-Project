@@ -12,7 +12,7 @@ __pycache__/
 # Ignorar la carpeta que descargaste de Roboflow
 Fire-Smoke-Detection-*/
 datasets/
-
+Deteccion-*/
 # --- Modelos y Pesos ---
 # Los archivos .pt son pesados y se descargan por código
 *.pt
