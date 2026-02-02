@@ -1,10 +1,14 @@
 import cv2
 import supervision as sv
 from ultralytics import RTDETR
+import os
 
 # --- CONFIGURACIÓN ---
+
+video_name = input("Ingrese el nombre del video (con extensión, ej: video.mp4): ")
+
 WEIGHTS_PATH = "best.pt"             # Tu modelo entrenado por tu amigo
-SOURCE_VIDEO_PATH = "video_fuego.f135.mp4" # <--- CAMBIÁ ESTO por el nombre de tu video
+SOURCE_VIDEO_PATH = os.path.join(os.path.dirname(__file__), video_name) # <--- CAMBIÁ ESTO por el nombre de tu video
 OUTPUT_VIDEO_PATH = "video_resultado.mp4"
 CONFIDENCE = 0.6                      # Confianza (ajustala si ves mucho o poco)
 
