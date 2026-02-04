@@ -22,9 +22,6 @@ Deteccion-*/
 # Acá se guardan gigas de logs y pruebas
 runs/
 
-# --- Archivos de Salida y Pruebas Locales ---
-# Imágenes de resultado generadas
-resultado_*.jpg
 
 
 # --- Configuración de IDE y Sistema ---
